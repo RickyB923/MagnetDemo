@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Utilities utilities = new Utilities();
     [SerializeField] float speed;
-    [SerializeField] public float weight;
     [Header ("1 = Positive, -1 = Negative")]
     public float polarity;
     public Vector3 lastPosition;
-    private Rigidbody rb;
+    public Rigidbody rb;
     public SphereCollider field;
     private MeshRenderer fieldRenderer;
     [Header("The materials for the magnetic fields")]
     [SerializeField] Material posFieldMat;
     [SerializeField] Material negFieldMat;
-    //private Material[] materials;
     private float rightLeftInput;
     private float forwardBackInput;
     private float magInput;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+        rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponentInChildren<SphereCollider>();
         fieldRenderer = field.GetComponent<MeshRenderer>();
     }
