@@ -59,25 +59,25 @@ public class Magnet : MonoBehaviour
 
     void Attract()
     {
-        if(player.rb.mass > rb.mass)
+        if(player.rb.mass > rb.mass) //moving smaller magnet to player
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.lastPosition + Vector3.forward, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
         }
-        else if(player.rb.mass <= rb.mass)
+        else if(player.rb.mass <= rb.mass) //moving player to larger magnet
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, lastPosition, 0.1f);
+            player.transform.position = Vector3.MoveTowards(player.transform.position, transform.position, 0.1f);
         }
     }
     void Repel()
     {
-        if(player.rb.mass > rb.mass)
+        if(player.rb.mass > rb.mass) //moving small magnet away from player
         {
-            transform.position = Vector3.MoveTowards(transform.position, -player.lastPosition, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, -player.transform.position, 0.1f);
         }
-        else if(player.rb.mass <= rb.mass)
+        else if(player.rb.mass <= rb.mass) //moving player away from larger magnet
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, -lastPosition, 0.1f);
-            //Not repelling away from magnet
+            player.transform.position = Vector3.MoveTowards(player.transform.position, -transform.position, 0.1f);
+            //Debug.Log("Repelling");
         }
     }
 }
