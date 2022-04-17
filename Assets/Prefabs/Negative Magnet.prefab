@@ -143,3 +143,4 @@ MonoBehaviour:
   player: {fileID: 0}
   polarity: 0
   lastPosition: {x: 0, y: 0, z: 0}
+  maxVelocity: 50

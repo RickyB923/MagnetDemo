@@ -4581,6 +4581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  maxVelocity: 20
   polarity: 0
   lastPosition: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
@@ -4847,7 +4848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7664736712483675744, guid: e2f89f96854e14f4eb280286aa201c99, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7664736712483675772, guid: e2f89f96854e14f4eb280286aa201c99, type: 3}
       propertyPath: m_RootOrder
@@ -4999,6 +5000,10 @@ PrefabInstance:
     - target: {fileID: 1544459133267891391, guid: d8a9a957c14f0dc40a5da147c07d4b11, type: 3}
       propertyPath: m_Name
       value: Positive Magnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544459133267891391, guid: d8a9a957c14f0dc40a5da147c07d4b11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8a9a957c14f0dc40a5da147c07d4b11, type: 3}

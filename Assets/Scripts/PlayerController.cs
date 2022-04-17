@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Utilities utilities = new Utilities();
     [SerializeField] float speed;
+    [SerializeField] float maxVelocity;
     [Header ("1 = Positive, -1 = Negative")]
     public float polarity;
     public Vector3 lastPosition;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         fieldRenderer.enabled = false;
         Move();
+        utilities.ClampVelocity(rb, maxVelocity);
     }
     void GetMoveInput()
     {

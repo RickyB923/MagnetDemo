@@ -12,6 +12,7 @@ public class Magnet : MonoBehaviour
     private SphereCollider field;
     public Vector3 lastPosition;
     private float distanceFromPlayer;
+    public float maxVelocity;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -26,7 +27,7 @@ public class Magnet : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+        utilities.ClampVelocity(rb, maxVelocity);
     }
     void OnTriggerStay(Collider other)
     {
@@ -59,25 +60,32 @@ public class Magnet : MonoBehaviour
 
     void Attract()
     {
+        
         if(player.rb.mass > rb.mass) //moving smaller magnet to player
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+            //rb.AddForce(player.lastPosition, ForceMode.Acceleration);
         }
         else if(player.rb.mass <= rb.mass) //moving player to larger magnet
         {
             player.transform.position = Vector3.MoveTowards(player.transform.position, transform.position, 0.1f);
+            //player.rb.AddForce(lastPosition, ForceMode.Acceleration);
         }
     }
     void Repel()
     {
         if(player.rb.mass > rb.mass) //moving small magnet away from player
-        {
-            transform.position = Vector3.MoveTowards(transform.position, -player.transform.position, 0.1f);
+        { 
+            //var angle = Vector3.Angle(player.transform.position, transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+            //rb.AddForce(-player.lastPosition, ForceMode.Acceleration);
         }
         else if(player.rb.mass <= rb.mass) //moving player away from larger magnet
         {
+            //var angle = Vector3.Angle(transform.position, player.transform.position);
             player.transform.position = Vector3.MoveTowards(player.transform.position, -transform.position, 0.1f);
-            //Debug.Log("Repelling");
-        }
+            //player.rb.AddForce(-lastPosition, ForceMode.Acceleration);
+        } 
     }
+
 }
