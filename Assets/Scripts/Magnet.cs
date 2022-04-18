@@ -76,14 +76,17 @@ public class Magnet : MonoBehaviour
     {
         if(player.rb.mass > rb.mass) //moving small magnet away from player
         { 
-            //var angle = Vector3.Angle(player.transform.position, transform.position);
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, -player.transform.position, 0.1f);
             //rb.AddForce(-player.lastPosition, ForceMode.Acceleration);
         }
         else if(player.rb.mass <= rb.mass) //moving player away from larger magnet
         {
-            //var angle = Vector3.Angle(transform.position, player.transform.position);
-            player.transform.position = Vector3.MoveTowards(player.transform.position, -transform.position, 0.1f);
+            Vector3 vector = player.transform.position - transform.position;
+            float distance = Mathf.Clamp(Vector3.Magnitude(vector), 1f, 10f);
+            vector.Normalize();
+            vector *= 1/distance;
+            player.transform.position += vector;
+            
             //player.rb.AddForce(-lastPosition, ForceMode.Acceleration);
         } 
     }
