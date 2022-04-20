@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header ("1 = Positive, -1 = Negative")]
     public float polarity;
     public Vector3 lastPosition;
+    private Camera cam;
     public Rigidbody rb;
     public SphereCollider field;
     private MeshRenderer fieldRenderer;
@@ -19,8 +20,11 @@ public class PlayerController : MonoBehaviour
     private float rightLeftInput;
     private float forwardBackInput;
     private float magInput;
+    public Vector2 mouseInput;
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        cam = this.GetComponentInChildren<Camera>();
         rb = this.GetComponent<Rigidbody>();
         rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponentInChildren<SphereCollider>();
@@ -44,6 +48,9 @@ public class PlayerController : MonoBehaviour
         rightLeftInput = Input.GetAxis("Horizontal");
         forwardBackInput = Input.GetAxis("BackNForth");
         magInput = Input.GetAxis("Magnet");
+        mouseInput.x += Input.GetAxis("Mouse X");
+        mouseInput.y += Input.GetAxis("Mouse Y");
+        mouseInput.y = Mathf.Clamp(mouseInput.y,-5,10);
     }
     void Move()
     {
@@ -75,5 +82,7 @@ public class PlayerController : MonoBehaviour
             fieldRenderer.enabled = true;
             fieldRenderer.material = negFieldMat;
         }
+        cam.transform.localRotation = Quaternion.Euler(mouseInput.y,0,0);
+        transform.localRotation = Quaternion.Euler(0,mouseInput.x,0); 
     }
 }

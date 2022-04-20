@@ -4204,7 +4204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.06, z: -7.12}
+  m_LocalPosition: {x: -0, y: 1.17, z: -7.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1205673939}
@@ -4588,13 +4588,14 @@ MonoBehaviour:
   field: {fileID: 0}
   posFieldMat: {fileID: 2100000, guid: 27708ef74b29afd43a734f8aae303eb3, type: 2}
   negFieldMat: {fileID: 2100000, guid: a196c31787df5f44698e7b1d15743f0b, type: 2}
+  mouseInput: {x: 0, y: 0}
 --- !u!43 &1445722065
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35952
+  m_Name: pb_Mesh22102
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
