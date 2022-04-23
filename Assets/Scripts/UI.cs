@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    // A short UI script for displaying the player's current inputs
+    // Not currently being used
+
     [SerializeField] PlayerController player;
     [SerializeField] GameObject rightText;
     [SerializeField] GameObject leftText;

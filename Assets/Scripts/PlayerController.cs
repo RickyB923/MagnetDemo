@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // The main variables and components of the Player
     private Utilities utilities = new Utilities();
     [SerializeField] float speed;
     [SerializeField] float maxVelocity;
@@ -17,11 +18,12 @@ public class PlayerController : MonoBehaviour
     [Header("The materials for the magnetic fields")]
     [SerializeField] Material posFieldMat;
     [SerializeField] Material negFieldMat;
+    // Input variables
     private float rightLeftInput;
     private float forwardBackInput;
     private float magInput;
     public Vector2 mouseInput;
-    void Start()
+    void Start() // Initializes components
     {
         Cursor.lockState = CursorLockMode.Locked;
         cam = this.GetComponentInChildren<Camera>();
@@ -30,20 +32,20 @@ public class PlayerController : MonoBehaviour
         field = this.GetComponentInChildren<SphereCollider>();
         fieldRenderer = field.GetComponent<MeshRenderer>();
     }
-    void Update()
+    void Update() // Resets certain variables every frame
     {
         var currentPosition = transform.position;
         GetMoveInput();
         polarity = magInput;
         lastPosition = currentPosition;
     }
-    void FixedUpdate()
+    void FixedUpdate() // Resets the magnetic field effect and clamps Rigidbody velocity
     {
         fieldRenderer.enabled = false;
         Move();
         utilities.ClampVelocity(rb, maxVelocity);
     }
-    void GetMoveInput()
+    void GetMoveInput() // Gets the values for player's inputs
     {
         rightLeftInput = Input.GetAxis("Horizontal");
         forwardBackInput = Input.GetAxis("BackNForth");
@@ -52,8 +54,9 @@ public class PlayerController : MonoBehaviour
         mouseInput.y += Input.GetAxis("Mouse Y");
         mouseInput.y = Mathf.Clamp(mouseInput.y,-5,10);
     }
-    void Move()
+    void Move() // Enacts the player's inputs (movement, magnets, carmera controls)
     {
+        // Directional movement
         if(rightLeftInput == 1)
         {
             transform.Translate(Vector3.right * Time.fixedDeltaTime * speed);
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.back * Time.fixedDeltaTime * speed);
         }
+        // Magnetic field control 
         if(magInput == 1)
         {
             polarity = magInput;
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
             fieldRenderer.enabled = true;
             fieldRenderer.material = negFieldMat;
         }
+        // Mouse controlled camera movement
         cam.transform.localRotation = Quaternion.Euler(mouseInput.y,0,0);
         transform.localRotation = Quaternion.Euler(0,mouseInput.x,0); 
     }

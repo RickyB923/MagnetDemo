@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
+    // The main variables and components of the Magnet 
     private Utilities utilities = new Utilities();
     [SerializeField] PlayerController player;
     [Header("True = Positive, False = Negative")]
@@ -13,27 +14,28 @@ public class Magnet : MonoBehaviour
     public Vector3 lastPosition;
     private float distanceFromPlayer;
     public float maxVelocity;
-    void Start()
+    void Start() // Initializes components
     {
         rb = this.GetComponent<Rigidbody>();
         rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponent<SphereCollider>();
     }
-    void Update()
+    void Update() // Gets important variables every frame
     {
         var currentPosition = transform.position;
         distanceFromPlayer = Vector3.Distance(player.lastPosition, lastPosition);
         lastPosition = currentPosition;
     }
-    void FixedUpdate()
+    void FixedUpdate() // Clamps Rigidbody velocity
     {
         utilities.ClampVelocity(rb, maxVelocity);
     }
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other) // Determines if the player is within the magnetic field of this magnet
     {
         if(other == player.field)
         {
-            if(player.polarity == 1)
+            // These check the polarity of the magnet and the player and call the appropriate method accordingly
+            if(player.polarity == 1) 
             {
                 if(polarity == true)
                 {
@@ -58,21 +60,21 @@ public class Magnet : MonoBehaviour
         }
     }
 
-    void Attract()
+    void Attract() // Attraction logic
     {
         
-        if(player.rb.mass > rb.mass) //moving smaller magnet to player
+        if(player.rb.mass > rb.mass) // Moves smaller magnet towards player
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
         }
-        else if(player.rb.mass <= rb.mass) //moving player to larger magnet
+        else if(player.rb.mass <= rb.mass) // Moves player towards larger magnet
         {
             player.transform.position = Vector3.MoveTowards(player.transform.position, transform.position, 0.1f);
         } 
     }
-    void Repel()
+    void Repel() // Repulsion logic
     {
-        if(player.transform.localScale.x > transform.localScale.x) //moving small magnet away from player
+        if(player.transform.localScale.x > transform.localScale.x) // Moves smaller magnet away from player
         { 
             Vector3 vector = transform.position - player.transform.position;
             float distance = Mathf.Clamp(Vector3.Magnitude(vector), 5f, 10f);
@@ -80,7 +82,7 @@ public class Magnet : MonoBehaviour
             vector *= 1/distance;
             transform.position += vector;  
         }
-        else if(player.transform.localScale.x <= transform.localScale.x) //moving player away from larger magnet
+        else if(player.transform.localScale.x <= transform.localScale.x) // Moves player away from larger magnet
         {
             Vector3 vector = player.transform.position - transform.position;
             float distance = Mathf.Clamp(Vector3.Magnitude(vector), 5f, 10f);
