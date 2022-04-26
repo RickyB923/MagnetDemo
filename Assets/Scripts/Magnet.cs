@@ -65,11 +65,21 @@ public class Magnet : MonoBehaviour
         
         if(player.rb.mass > rb.mass) // Moves smaller magnet towards player
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+            //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 0.1f);
+            Vector3 vector = transform.position - player.transform.position;
+            float distance = Mathf.Clamp(Vector3.Magnitude(vector), 5f, 10f);
+            vector.Normalize();
+            vector *= 1 / distance;
+            transform.position -= vector;
         }
         else if(player.rb.mass <= rb.mass) // Moves player towards larger magnet
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, transform.position, 0.1f);
+            //player.transform.position = Vector3.MoveTowards(player.transform.position, transform.position, 0.1f);
+            Vector3 vector = player.transform.position - transform.position;
+            float distance = Mathf.Clamp(Vector3.Magnitude(vector), 5f, 10f);
+            vector.Normalize();
+            vector *= 1 / distance;
+            player.transform.position -= vector;
         } 
     }
     void Repel() // Repulsion logic
