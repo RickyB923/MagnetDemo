@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float rightLeftInput;
     private float forwardBackInput;
     private float magInput;
+    public bool pauseInput = false;
     public Vector2 mouseInput;
     void Start() // Initializes components
     {
@@ -53,6 +54,10 @@ public class PlayerController : MonoBehaviour
         mouseInput.x += Input.GetAxis("Mouse X");
         mouseInput.y += Input.GetAxis("Mouse Y");
         mouseInput.y = Mathf.Clamp(mouseInput.y,-5,10);
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseInput = !pauseInput;
+        }
     }
     void Move() // Enacts the player's inputs (movement, magnets, carmera controls)
     {
@@ -89,5 +94,7 @@ public class PlayerController : MonoBehaviour
         // Mouse controlled camera movement
         cam.transform.localRotation = Quaternion.Euler(mouseInput.y,0,0);
         transform.localRotation = Quaternion.Euler(0,mouseInput.x,0); 
+        // Pausing
+        
     }
 }

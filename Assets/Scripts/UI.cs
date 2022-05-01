@@ -5,21 +5,28 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    // A short UI script for displaying the player's current inputs
-    // Not currently being used
-
     [SerializeField] PlayerController player;
-    [SerializeField] GameObject instructions;
-    [SerializeField] public bool showInstructions;
-    void Start()
+    [SerializeField] GameObject pauseScreen;
+    void Update() // Checks if the player has paused the game
     {
-        if(showInstructions)
+        if(player.pauseInput)
         {
-            instructions.SetActive(true);
+            Pause();
         }
         else
         {
-            instructions.SetActive(false);
+            Unpause();
         }
+        
+    }
+    void Pause() // Pauses the game
+    {
+        pauseScreen.SetActive(true);  
+        Time.timeScale = 0;
+    }
+    void Unpause() // Unpauses the game
+    {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 }

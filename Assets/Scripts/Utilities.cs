@@ -18,5 +18,5 @@ public class Utilities
         var clampedVelocityY = Mathf.Clamp(rb.velocity.y, -maxVelocity, maxVelocity);
         var clampedVelocityZ = Mathf.Clamp(rb.velocity.z, -maxVelocity, maxVelocity);
         rb.velocity = new Vector3(clampedVelocityX,clampedVelocityY,clampedVelocityZ);
-    }
+    }   
 }
