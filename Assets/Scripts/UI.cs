@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -8,22 +9,17 @@ public class UI : MonoBehaviour
     // Not currently being used
 
     [SerializeField] PlayerController player;
-    [SerializeField] GameObject rightText;
-    [SerializeField] GameObject leftText;
-    void Update()
+    [SerializeField] GameObject instructions;
+    [SerializeField] public bool showInstructions;
+    void Start()
     {
-        if(player.polarity > 0)
+        if(showInstructions)
         {
-            rightText.SetActive(true);
-        }
-        else if(player.polarity < 0)
-        {
-            leftText.SetActive(true);
+            instructions.SetActive(true);
         }
         else
         {
-            rightText.SetActive(false);
-            leftText.SetActive(false);
+            instructions.SetActive(false);
         }
     }
 }

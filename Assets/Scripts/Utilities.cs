@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utilities : MonoBehaviour
+public class Utilities
 {
     // A short utility script for methods that need to be called in multiple other scripts
 
