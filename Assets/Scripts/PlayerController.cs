@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
     {
         fieldRenderer.enabled = false;
         Move();
-        utilities.ClampVelocity(rb, maxVelocity);
+        Vector3 vector = utilities.ClampVelocity(rb, maxVelocity);
+        rb.AddForce(vector,ForceMode.Impulse);
     }
     void GetMoveInput() // Gets the values for player's inputs
     {
@@ -94,7 +95,5 @@ public class PlayerController : MonoBehaviour
         // Mouse controlled camera movement
         cam.transform.localRotation = Quaternion.Euler(mouseInput.y,0,0);
         transform.localRotation = Quaternion.Euler(0,mouseInput.x,0); 
-        // Pausing
-        
     }
 }
