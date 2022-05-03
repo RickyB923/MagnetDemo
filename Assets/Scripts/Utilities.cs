@@ -11,11 +11,11 @@ public class Utilities
         float temp = x + y + z;
         return temp/3f;
     }
-    public Vector3 ClampVelocity(Rigidbody rb, float maxVelocity) // Clamps a Rigidbody's velocity based on passed in parameters
+    public void ClampVelocity(Rigidbody rb, float maxVelocity) // Clamps a Rigidbody's velocity based on passed in parameters
     {
         var clampedVelocityX = Mathf.Clamp(rb.velocity.x, -maxVelocity, maxVelocity);
         var clampedVelocityY = Mathf.Clamp(rb.velocity.y, -maxVelocity, maxVelocity);
         var clampedVelocityZ = Mathf.Clamp(rb.velocity.z, -maxVelocity, maxVelocity);
-        return new Vector3(clampedVelocityX,clampedVelocityY,clampedVelocityZ);
+        rb.velocity = new Vector3(clampedVelocityX,clampedVelocityY,clampedVelocityZ);
     }   
 }

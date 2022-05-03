@@ -44,8 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         fieldRenderer.enabled = false;
         Move();
-        Vector3 vector = utilities.ClampVelocity(rb, maxVelocity);
-        rb.AddForce(vector,ForceMode.Impulse);
+        utilities.ClampVelocity(rb, maxVelocity);
     }
     void GetMoveInput() // Gets the values for player's inputs
     {
