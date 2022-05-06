@@ -8,25 +8,32 @@ public class Button : MonoBehaviour
     [SerializeField] public bool onOffState;
     [Header("True = Needs Positive, False = Needs Negative")]
     [SerializeField] private bool neededPolarity;
-    void OnTriggerEnter(Collider other)
+    [SerializeField] private PhysicMaterial referenceMaterial;
+    void OnTriggerEnter(Collider other) // Turns button on if the proper magnet enters the trigger
     {
-        if(other.gameObject.CompareTag("Magnet"))
+        if (other.sharedMaterial != null)
         {
-            var magnet = other.gameObject.GetComponent<Magnet>();
-            if(neededPolarity == magnet.polarity)
+            if (other.sharedMaterial == referenceMaterial)
             {
-                onOffState = true;
+                var magnet = other.gameObject.GetComponent<Magnet>();
+                if (neededPolarity == magnet.polarity)
+                {
+                    onOffState = true;
+                }
             }
         }
     }
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other) // Turns the button off if the proper magnet leaves the trigger
     {
-        if (other.gameObject.CompareTag("Magnet"))
+        if (other.sharedMaterial != null)
         {
-            var magnet = other.gameObject.GetComponent<Magnet>();
-            if (neededPolarity == magnet.polarity)
+            if (other.sharedMaterial == referenceMaterial)
             {
-                onOffState = false;
+                var magnet = other.gameObject.GetComponent<Magnet>();
+                if (neededPolarity == magnet.polarity)
+                {
+                    onOffState = false;
+                }
             }
         }
     }
