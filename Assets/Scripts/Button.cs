@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    // This script is for the button game objects, used for solving puzzles
+    // This script is for the button GameObject, used for solving puzzles
     [Header("True = On, False = Off")]
     [SerializeField] public bool onOffState;
     [Header("True = Needs Positive, False = Needs Negative")]

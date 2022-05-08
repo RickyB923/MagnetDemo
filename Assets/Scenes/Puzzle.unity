@@ -5223,7 +5223,6 @@ MonoBehaviour:
   speed: 10
   maxVelocity: 20
   polarity: 0
-  lastPosition: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   field: {fileID: 0}
   posFieldMat: {fileID: 2100000, guid: 27708ef74b29afd43a734f8aae303eb3, type: 2}
@@ -5369,7 +5368,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33476
+  m_Name: pb_Mesh61772
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
-    [SerializeField] GameObject pauseScreen;
+    [SerializeField] PlayerController player; // The current instance of the player
+    [SerializeField] GameObject pauseScreen; // The pause screen to be shown
     void Update() // Checks if the player has paused the game
     {
         if(player.pauseInput)

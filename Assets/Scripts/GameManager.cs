@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     [Header("True = Puzzle, False = Platformer")]
     [SerializeField] bool gameType; // A boolean that determines which type of game is being played in the scene
     [SerializeField] Button[] buttons; // The array of buttons that need to be activated to win
-    [SerializeField] Collider goal; // The goal the player needs to get to in order to win
     [SerializeField] GameObject winScreen; // The win screen to be displayed
     private bool success; // A simple class variable to be used to check if the player has succeeded
     void Update() // Displays win screen if check is successful
@@ -19,9 +18,7 @@ public class GameManager : MonoBehaviour
         }
         if (success)
         {
-            Cursor.lockState = CursorLockMode.None;
-            winScreen.SetActive(true);
-            Time.timeScale = 0;
+            DisplayWinScreen();
         }
     }
     public bool CheckButtons() // Runs a check to see if all buttons are switched on
@@ -35,5 +32,11 @@ public class GameManager : MonoBehaviour
             }
         }
         return success;
+    }
+    public void DisplayWinScreen() // Displays win screen
+    {
+        Cursor.lockState = CursorLockMode.None;
+        winScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 }
