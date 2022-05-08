@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxVelocity;
     [Header ("1 = Positive, -1 = Negative")]
     public float polarity;
-    public Vector3 lastPosition;
     private Camera cam;
     public Rigidbody rb;
     public SphereCollider field;
@@ -35,10 +34,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update() // Resets certain variables every frame
     {
-        var currentPosition = transform.position;
         GetMoveInput();
         polarity = magInput;
-        lastPosition = currentPosition;
     }
     void FixedUpdate() // Resets the magnetic field effect and clamps Rigidbody velocity
     {
@@ -54,7 +51,7 @@ public class PlayerController : MonoBehaviour
         mouseInput.x += Input.GetAxis("Mouse X");
         mouseInput.y += Input.GetAxis("Mouse Y");
         mouseInput.y = Mathf.Clamp(mouseInput.y,-5,10);
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape)) // Checks for the pause input and flips the pause boolean
         {
             pauseInput = !pauseInput;
         }

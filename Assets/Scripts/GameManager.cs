@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("True = Puzzle, False = Other")]
-    [SerializeField] bool gameType;
-    [SerializeField] Button[] buttons;
-    [SerializeField] GameObject winScreen;
-    private bool success;
+    // This script manages the win conditions of the scenes "Puzzle" and "Platformer"
+    [Header("True = Puzzle, False = Platformer")]
+    [SerializeField] bool gameType; // A boolean that determines which type of game is being played in the scene
+    [SerializeField] Button[] buttons; // The array of buttons that need to be activated to win
+    [SerializeField] Collider goal; // The goal the player needs to get to in order to win
+    [SerializeField] GameObject winScreen; // The win screen to be displayed
+    private bool success; // A simple class variable to be used to check if the player has succeeded
     void Update() // Displays win screen if check is successful
     {
         if(gameType)
@@ -35,7 +37,3 @@ public class GameManager : MonoBehaviour
         return success;
     }
 }
-
-
-//trying to figure out why ui buttons won't work in puzzle scene
-// strange index null error also

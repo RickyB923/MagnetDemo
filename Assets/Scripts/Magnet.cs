@@ -11,20 +11,12 @@ public class Magnet : MonoBehaviour
     [SerializeField] public bool polarity;
     private Rigidbody rb;
     private SphereCollider field;
-    public Vector3 lastPosition;
-    private float distanceFromPlayer;
     public float maxVelocity;
     void Start() // Initializes components
     {
         rb = this.GetComponent<Rigidbody>();
         rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponent<SphereCollider>();
-    }
-    void Update() // Gets important variables every frame
-    {
-        var currentPosition = transform.position;
-        distanceFromPlayer = Vector3.Distance(player.lastPosition, lastPosition);
-        lastPosition = currentPosition;
     }
     void FixedUpdate() // Clamps Rigidbody velocity
     {
@@ -72,6 +64,7 @@ public class Magnet : MonoBehaviour
             //vector.Normalize();
             //vector *= 1 / distance;
             //transform.position -= vector;
+            // ^ Alternate attraction method that is not being used ^
         }
         else if(player.rb.mass <= rb.mass) // Moves player towards larger magnet
         {
@@ -81,6 +74,7 @@ public class Magnet : MonoBehaviour
             //vector.Normalize();
             //vector *= 1 / distance;
             //player.transform.position -= vector;
+            // ^ Alternate attraction method that is not being used ^
         } 
     }
     void Repel() // Repulsion logic
