@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
+    // This script manages the pause screen and its interactive elements
     [SerializeField] PlayerController player; // The current instance of the player
     [SerializeField] GameObject pauseScreen; // The pause screen to be shown
+    [SerializeField] GameObject winScreen; // Needed to check if it's already on
     void Update() // Checks if the player has paused the game
     {
+        if(winScreen.activeSelf)
+            return;
         if(player.pauseInput)
         {
             Pause();
@@ -28,8 +32,8 @@ public class PauseScreen : MonoBehaviour
     void Unpause() // Unpauses the game
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
         pauseScreen.SetActive(false);
+        Time.timeScale = 1;
     }
     public void Reset() // Resets the current scene
     {
@@ -40,5 +44,4 @@ public class PauseScreen : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
-
 }

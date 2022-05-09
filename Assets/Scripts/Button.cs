@@ -6,9 +6,9 @@ public class Button : MonoBehaviour
 {
     // This script is for the button GameObject, used for solving puzzles
     [Header("True = On, False = Off")]
-    [SerializeField] public bool onOffState;
+    [SerializeField] public bool onOffState; // The state of the button, On or Off
     [Header("True = Needs Positive, False = Needs Negative")]
-    [SerializeField] private bool neededPolarity;
+    [SerializeField] private bool neededPolarity; // The polarity needed to switch the button on
     [SerializeField] private PhysicMaterial referenceMaterial; // A material used to check if a magnet has collided with the button
     void OnTriggerEnter(Collider other) // Turns button on if the proper magnet enters the trigger
     {

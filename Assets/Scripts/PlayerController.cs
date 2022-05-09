@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Utilities;
 
 public class PlayerController : MonoBehaviour
 {
+    // This script handles gathering player inputs and enacting player controls 
     // The main variables and components of the Player
-    private Utilities utilities = new Utilities();
     [SerializeField] float speed;
     [SerializeField] float maxVelocity;
     [Header ("1 = Positive, -1 = Negative")]
@@ -21,14 +22,14 @@ public class PlayerController : MonoBehaviour
     private float rightLeftInput;
     private float forwardBackInput;
     private float magInput;
+    private Vector2 mouseInput;
     public bool pauseInput = false;
-    public Vector2 mouseInput;
     void Start() // Initializes components
     {
         Cursor.lockState = CursorLockMode.Locked;
         cam = this.GetComponentInChildren<Camera>();
         rb = this.GetComponent<Rigidbody>();
-        rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        rb.mass = CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponentInChildren<SphereCollider>();
         fieldRenderer = field.GetComponent<MeshRenderer>();
     }
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         fieldRenderer.enabled = false;
         Move();
-        utilities.ClampVelocity(rb, maxVelocity);
+        ClampVelocity(rb, maxVelocity);
     }
     void GetMoveInput() // Gets the values for player's inputs
     {

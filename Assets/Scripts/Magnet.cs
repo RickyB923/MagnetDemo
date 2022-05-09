@@ -1,26 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Utilities;
 
 public class Magnet : MonoBehaviour
 {
+    // This script handles the behavior of the Magnet GameObjects
     // The main variables and components of the Magnet 
-    private Utilities utilities = new Utilities();
     [SerializeField] PlayerController player;
     [Header("True = Positive, False = Negative")]
     [SerializeField] public bool polarity;
     private Rigidbody rb;
     private SphereCollider field;
     public float maxVelocity;
+    private Utilities utilities = new Utilities();
     void Start() // Initializes components
     {
         rb = this.GetComponent<Rigidbody>();
-        rb.mass = utilities.CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        rb.mass = CalculateMass(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         field = this.GetComponent<SphereCollider>();
     }
     void FixedUpdate() // Clamps Rigidbody velocity
     {
-        utilities.ClampVelocity(rb, maxVelocity);
+        ClampVelocity(rb, maxVelocity);
     }
 
     void OnTriggerStay(Collider other) // Determines if the player is within the magnetic field of this magnet
@@ -64,7 +66,8 @@ public class Magnet : MonoBehaviour
             //vector.Normalize();
             //vector *= 1 / distance;
             //transform.position -= vector;
-            // ^ Alternate attraction method that is not being used ^
+
+            // ^ Alternate attraction method, not being used ^
         }
         else if(player.rb.mass <= rb.mass) // Moves player towards larger magnet
         {
@@ -74,7 +77,8 @@ public class Magnet : MonoBehaviour
             //vector.Normalize();
             //vector *= 1 / distance;
             //player.transform.position -= vector;
-            // ^ Alternate attraction method that is not being used ^
+
+            // ^ Alternate attraction method, not being used ^
         } 
     }
     void Repel() // Repulsion logic
@@ -96,5 +100,4 @@ public class Magnet : MonoBehaviour
             player.transform.position += vector;   
         } 
     }
-
 }
